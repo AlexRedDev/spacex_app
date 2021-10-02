@@ -42,7 +42,8 @@ class _HomeViewState extends State<HomeView> {
           controller: _textController,
           onChanged: (value) {
             if (value.length <= 3) return;
-            context.read<AppBloc>().add(FetchLaunches(searhcMission: value));
+            context.read<AppBloc>().add(ChangedMissionName(value));
+            context.read<AppBloc>().add(FetchLaunches());
           },
           textAlign: TextAlign.center,
           decoration: const InputDecoration(
@@ -72,7 +73,7 @@ class _HomeViewState extends State<HomeView> {
   Widget _initialState() {
     return const Center(
         child: Icon(
-      Icons.favorite,
+      Icons.shield_sharp,
       color: Colors.red,
       size: 52,
     ));
@@ -100,9 +101,7 @@ class _HomeViewState extends State<HomeView> {
 
   void _onScroll() {
     if (_isBottom) {
-      context
-          .read<AppBloc>()
-          .add(FetchLaunches(searhcMission: _textController.text));
+      context.read<AppBloc>().add(ReFetchLaunches());
     }
   }
 

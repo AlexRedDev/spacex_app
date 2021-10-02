@@ -1,10 +1,22 @@
-abstract class AppEvent {}
+import 'package:equatable/equatable.dart';
+import 'package:spacex_app/src/app.dart';
+
+abstract class AppEvent extends Equatable {}
+
+class ChangedMissionName extends AppEvent {
+  final String missionName;
+  ChangedMissionName(this.missionName);
+
+  @override
+  List<Object?> get props => [missionName];
+}
 
 class FetchLaunches extends AppEvent {
-  final String searhcMission;
-  FetchLaunches({required this.searhcMission});
+  @override
+  List<Object?> get props => [];
 }
 
 class ReFetchLaunches extends AppEvent {
-  final 
+  @override
+  List<Object?> get props => [];
 }

@@ -38,6 +38,9 @@ dependencies:
   flutter_bloc: ^7.3.0
   graphql: ^5.0.0
   rxdart: ^0.26.0
+  stream_transform: ^2.0.0
+  bloc_concurrency: ^0.1.0
+  equatable: ^2.0.3
 
 dev_dependencies:
   flutter_test:

@@ -26,7 +26,7 @@ class GraphQlApi {
 
   String _buildQuery(String missionName, int offset) {
     return '''{
-      launches(find: {mission_name: "${missionName}"}, limit: 10, offset: $offset) {
+      launches(find: {mission_name: "$missionName"}, limit: 10, offset: $offset) {
         mission_name
         details
       }
