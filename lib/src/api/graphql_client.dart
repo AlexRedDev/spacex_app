@@ -4,8 +4,7 @@ import 'package:spacex_app/src/models/launches.dart';
 class GraphQlApi {
   final _link = HttpLink('https://api.spacex.land/graphql/');
 
-  Future<List<Launches>> fetchLaunches({required String missionName,
-      int offset = 0}) async {
+  Future<List<Launches>> fetchLaunches(String missionName, int offset) async {
     final GraphQLClient client = GraphQLClient(
       link: _link,
       cache: GraphQLCache(),
@@ -20,11 +19,9 @@ class GraphQlApi {
       throw Exception(result.exception?.graphqlErrors);
     }
 
-    final response = result.data?['data'];
-    final listLaunches = (response as List)
-        .map((jsonItem) => Launches.fromJson(jsonItem))
-        .toList();
-    return listLaunches;
+    final response = result.data?['launches'];
+    final list = response.map<Launches>((e) => Launches.fromJson(e)).toList();
+    return list;
   }
 
   String _buildQuery(String missionName, int offset) {

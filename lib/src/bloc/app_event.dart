@@ -5,3 +5,6 @@ class FetchLaunches extends AppEvent {
   FetchLaunches({required this.searhcMission});
 }
 
+class ReFetchLaunches extends AppEvent {
+  final 
+}

@@ -1,6 +1,6 @@
 class Launches {
   final String missionName;
-  final String details;
+  final String? details;
 
   Launches({
     required this.missionName,
@@ -8,6 +8,6 @@ class Launches {
   });
 
   Launches.fromJson(Map<String, dynamic> json)
-      : missionName = json['mission_name'],
-        details = json['details'];
+      : missionName = json['mission_name'] as String,
+        details = json['details'] == null ? '' : json['details'];
 }
