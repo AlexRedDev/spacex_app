@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_app/src/screens/home_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spacex_app/src/bloc/app_bloc.dart';
+import 'package:spacex_app/src/repository/repository.dart';
+import 'package:spacex_app/src/screens/home/home_view.dart';
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({Key? key, required this.repository}) : super(key: key);
+  final Repository repository;
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'SpaceX',
-      home: HomeView(),
+      home: BlocProvider(
+        create: (context) => AppBloc(repository: repository),
+        child: HomeView(),
+      ),
     );
   }
 }

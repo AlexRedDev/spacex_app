@@ -7,10 +7,7 @@ class Launches {
     required this.details,
   });
 
-  Launches fromJson(Map<String, dynamic> json) {
-    return Launches(
-      missionName: json['mission_name'],
-      details: json['details'],
-    );
-  }
+  Launches.fromJson(Map<String, dynamic> json)
+      : missionName = json['mission_name'],
+        details = json['details'];
 }
