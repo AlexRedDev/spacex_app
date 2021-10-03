@@ -4,12 +4,7 @@ import 'package:spacex_app/src/models/launches.dart';
 class Repository {
   final GraphQlApi _graphQlApi = GraphQlApi();
 
-  Future<List<Launches>> getLaunches({
-    required String nameMission,
-    int offset = 0,
-  }) async {
-    final list = await _graphQlApi.fetchLaunches(nameMission, offset);
-    
-    return list;
-  }
+  Future<List<Launches>> getLaunches(
+          {required String nameMission, int offset = 0}) async =>
+      await _graphQlApi.fetchLaunches(nameMission, offset);
 }

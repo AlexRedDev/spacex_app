@@ -27,18 +27,21 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
+      backgroundColor: Colors.black,
       body: _listLauches(),
     );
   }
 
   AppBar _appBar() {
     return AppBar(
+      backgroundColor: Colors.grey[850],
       title: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(25),
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(15),
         ),
         child: TextField(
+          style: TextStyle(color: Colors.white, fontSize: 16),
           controller: _textController,
           onChanged: (value) {
             if (value.length <= 3) return;
@@ -47,9 +50,9 @@ class _HomeViewState extends State<HomeView> {
           },
           textAlign: TextAlign.center,
           decoration: const InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 12.0),
-            border: InputBorder.none,
-          ),
+              border: InputBorder.none,
+              hintText: 'Enter mission name',
+              hintStyle: TextStyle(color: Colors.white54)),
         ),
       ),
     );
@@ -71,12 +74,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _initialState() {
-    return const Center(
-        child: Icon(
-      Icons.shield_sharp,
-      color: Colors.red,
-      size: 52,
-    ));
+    return Container();
   }
 
   Widget _successState(AppState state) {

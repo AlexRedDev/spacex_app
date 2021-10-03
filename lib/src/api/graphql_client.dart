@@ -3,9 +3,14 @@ import 'package:spacex_app/src/models/launches.dart';
 
 class GraphQlApi {
   final _link = HttpLink('https://api.spacex.land/graphql/');
+  late GraphQLClient _client;
+
+  GraphQlApi() {
+    _client = GraphQLClient(link: _link, cache: GraphQLCache());
+  }
 
   Future<List<Launches>> fetchLaunches(String missionName, int offset) async {
-    final GraphQLClient client = GraphQLClient(
+    _client = GraphQLClient(
       link: _link,
       cache: GraphQLCache(),
     );
@@ -13,7 +18,7 @@ class GraphQlApi {
     final options =
         QueryOptions(document: gql(_buildQuery(missionName, offset)));
 
-    final result = await client.query(options);
+    final result = await _client.query(options);
 
     if (result.hasException) {
       throw Exception(result.exception?.graphqlErrors);
@@ -29,6 +34,9 @@ class GraphQlApi {
       launches(find: {mission_name: "$missionName"}, limit: 10, offset: $offset) {
         mission_name
         details
+        links {
+          flickr_images
+        }
       }
     }''';
   }
