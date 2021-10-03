@@ -1,7 +1,8 @@
 import 'package:graphql/client.dart';
+import 'package:spacex_app/src/api/api_client.dart';
 import 'package:spacex_app/src/models/launches.dart';
 
-class GraphQlApi {
+class GraphQlApi extends ApiClient {
   final _link = HttpLink('https://api.spacex.land/graphql/');
   late GraphQLClient _client;
 
@@ -9,14 +10,12 @@ class GraphQlApi {
     _client = GraphQLClient(link: _link, cache: GraphQLCache());
   }
 
+  @override
   Future<List<Launches>> fetchLaunches(String missionName, int offset) async {
-    _client = GraphQLClient(
-      link: _link,
-      cache: GraphQLCache(), 
-    );
-
-    final options =
-        QueryOptions(document: gql(_buildQuery(missionName, offset)));
+    final options = QueryOptions(
+        document: gql(
+      _buildQuery(missionName, offset),
+    ));
 
     final result = await _client.query(options);
 
