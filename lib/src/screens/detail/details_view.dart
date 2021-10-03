@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_app/src/models/launches.dart';
 
@@ -6,6 +7,7 @@ class DetailsView extends StatelessWidget {
   final Launches launches;
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -13,9 +15,26 @@ class DetailsView extends StatelessWidget {
           style: Theme.of(context).textTheme.headline1,
         ),
       ),
-      body: ListView(
+      body: _details(context, height),
+    );
+  }
+
+  Widget _details(BuildContext context, double height) {
+    if (launches.details == null) {
+      return Container(
+        child: _picture(
+          launches.urlImage.isNotEmpty ? launches.urlImage : null,
+          height,
+        ),
+      );
+    } else {
+      return ListView(
         children: [
-          _picture(launches.urlImage),
+          _picture(
+            launches.urlImage.isNotEmpty ? launches.urlImage : null,
+            height / 2,
+          ),
+          const SizedBox(height: 22),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: Text(
@@ -25,18 +44,28 @@ class DetailsView extends StatelessWidget {
             ),
           )
         ],
-      ),
-    );
-  }
-
-  Widget _picture(String? url) {
-    if (url != null) {
-      return Image.network(url);
-    } else {
-      return Placeholder(
-        fallbackHeight: 300,
-        fallbackWidth: double.infinity,
       );
     }
+  }
+
+  Widget _picture(List<String>? urlImages, double height) {
+    return urlImages == null
+        ? Container()
+        : CarouselSlider.builder(
+            itemCount: urlImages.length,
+            itemBuilder: (context, itemIndex, pageViewIndex) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.network(
+                  urlImages[itemIndex],
+                  fit: BoxFit.cover,
+                ),
+              );
+            },
+            options: CarouselOptions(
+              viewportFraction: 1,
+              height: height,
+            ),
+          );
   }
 }

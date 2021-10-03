@@ -12,7 +12,7 @@ class GraphQlApi {
   Future<List<Launches>> fetchLaunches(String missionName, int offset) async {
     _client = GraphQLClient(
       link: _link,
-      cache: GraphQLCache(),
+      cache: GraphQLCache(), 
     );
 
     final options =

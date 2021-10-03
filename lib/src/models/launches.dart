@@ -1,7 +1,7 @@
 class Launches {
   final String missionName;
   final String? details;
-  final String? urlImage;
+  final List<String> urlImage;
 
   Launches({
     required this.missionName,
@@ -11,6 +11,6 @@ class Launches {
 
   Launches.fromJson(Map<String, dynamic> json)
       : missionName = json['mission_name'] as String,
-        details = json['details'] ?? '',
-        urlImage = json['links']['flickr_images'][0] ?? '';
+        details = json['details'] ?? null,
+        urlImage = List.from(json['links']['flickr_images']);
 }

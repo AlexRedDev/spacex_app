@@ -19,7 +19,8 @@ class LaunchesItem extends StatelessWidget {
         height: height / 2,
         child: Column(
           children: [
-            _iconLaunches(launches.urlImage),
+            _iconLaunches(
+                launches.urlImage.isNotEmpty ? launches.urlImage.first : null),
             const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -49,9 +50,8 @@ class LaunchesItem extends StatelessWidget {
 
   Widget _iconLaunches(String? imageUrl) {
     return imageUrl == null
-        ? const Placeholder(
-            fallbackHeight: 25,
-            fallbackWidth: 25,
+        ? Container(
+            height: 300,
           )
         : Image.network(
             imageUrl,
@@ -59,12 +59,14 @@ class LaunchesItem extends StatelessWidget {
               if (loadingProgress == null) {
                 return child;
               } else {
-                return CircularProgressIndicator(
-                  color: Theme.of(context).primaryColor,
-                  value: loadingProgress.expectedTotalBytes != null
-                      ? loadingProgress.cumulativeBytesLoaded /
-                          loadingProgress.expectedTotalBytes!
-                      : null,
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
                 );
               }
             },
