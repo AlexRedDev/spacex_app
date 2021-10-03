@@ -25,6 +25,7 @@ class GraphQlApi {
     }
 
     final response = result.data?['launches'];
+
     final list = response.map<Launches>((e) => Launches.fromJson(e)).toList();
     return list;
   }

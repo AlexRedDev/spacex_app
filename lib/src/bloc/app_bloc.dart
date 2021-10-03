@@ -76,6 +76,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           hasReachedMax: false,
         ));
         offset++;
+        print(offset);
       }
     } catch (e) {
       emit(state.copyWith(

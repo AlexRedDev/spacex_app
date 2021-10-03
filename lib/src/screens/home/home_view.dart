@@ -27,21 +27,20 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      backgroundColor: Colors.black,
       body: _listLauches(),
     );
   }
 
   AppBar _appBar() {
     return AppBar(
-      backgroundColor: Colors.grey[850],
       title: Container(
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(15),
         ),
         child: TextField(
-          style: TextStyle(color: Colors.white, fontSize: 16),
+          cursorColor: Colors.white,
+          style: Theme.of(context).textTheme.headline2,
           controller: _textController,
           onChanged: (value) {
             if (value.length <= 3) return;
@@ -50,9 +49,10 @@ class _HomeViewState extends State<HomeView> {
           },
           textAlign: TextAlign.center,
           decoration: const InputDecoration(
-              border: InputBorder.none,
-              hintText: 'Enter mission name',
-              hintStyle: TextStyle(color: Colors.white54)),
+            border: InputBorder.none,
+            hintText: 'Enter mission name',
+            hintStyle: TextStyle(color: Colors.white54),
+          ),
         ),
       ),
     );
@@ -93,7 +93,11 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _failureState(String errorMessage) {
     return Center(
-      child: Text(errorMessage, textAlign: TextAlign.center),
+      child: Text(
+        errorMessage,
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
     );
   }
 
