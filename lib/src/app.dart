@@ -17,7 +17,7 @@ class App extends StatelessWidget {
       title: 'SpaceX',
       home: BlocProvider(
         create: (context) => AppBloc(repository: repository),
-        child: HomeView(),
+        child: const HomeView(),
       ),
     );
   }

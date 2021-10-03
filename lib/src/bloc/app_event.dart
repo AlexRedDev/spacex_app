@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:spacex_app/src/app.dart';
 
 abstract class AppEvent extends Equatable {}
 

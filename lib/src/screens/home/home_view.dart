@@ -35,12 +35,12 @@ class _HomeViewState extends State<HomeView> {
     return AppBar(
       title: Container(
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: Theme.of(context).backgroundColor,
           borderRadius: BorderRadius.circular(15),
         ),
         child: TextField(
-          cursorColor: Colors.white,
           style: Theme.of(context).textTheme.headline2,
+          cursorColor: Theme.of(context).primaryColor,
           controller: _textController,
           onChanged: (value) {
             if (value.length <= 3) return;

@@ -60,9 +60,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   ) async {
     try {
       if (state.hasReachedMax) return;
-      final list = await repository.getLaunches(
+      final list = await repository.loadMoreLauches(
         nameMission: state.missionName,
-        offset: offset,
       );
       if (list.isEmpty) {
         emit(state.copyWith(
@@ -76,7 +75,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           hasReachedMax: false,
         ));
         offset++;
-        print(offset);
       }
     } catch (e) {
       emit(state.copyWith(

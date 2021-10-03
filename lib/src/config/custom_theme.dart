@@ -5,6 +5,7 @@ class CustomTheme {
     return ThemeData(
       primaryColor: Colors.white,
       hintColor: Colors.white54,
+      backgroundColor: Colors.black,
       scaffoldBackgroundColor: Colors.black,
       appBarTheme: AppBarTheme(backgroundColor: Colors.grey[850]),
       textTheme: const TextTheme(
@@ -22,7 +23,7 @@ class CustomTheme {
           color: Colors.white,
         ),
       ),
-      inputDecorationTheme: InputDecorationTheme(
+      inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,
         hintStyle: TextStyle(color: Colors.white54),
       ),
