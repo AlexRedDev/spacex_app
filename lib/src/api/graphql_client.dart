@@ -7,8 +7,10 @@ class GraphQlApi extends ApiClient {
   late GraphQLClient _client;
   int _offset = 0;
 
-  GraphQlApi() {
-    _client = GraphQLClient(link: _link, cache: GraphQLCache());
+  GraphQlApi({GraphQLClient? client}) {
+    client != null
+        ? _client = client
+        : _client = GraphQLClient(link: _link, cache: GraphQLCache());
   }
 
   @override
@@ -23,12 +25,11 @@ class GraphQlApi extends ApiClient {
 
     if (result.hasException) {
       throw Exception(result.exception?.graphqlErrors);
+    } else {
+      final response = result.data?['launches'];
+      final list = response.map<Launches>((e) => Launches.fromJson(e)).toList();
+      return list;
     }
-
-    final response = result.data?['launches'];
-
-    final list = response.map<Launches>((e) => Launches.fromJson(e)).toList();
-    return list;
   }
 
   @override
@@ -43,12 +44,12 @@ class GraphQlApi extends ApiClient {
 
     if (result.hasException) {
       throw Exception(result.exception?.graphqlErrors);
+    } else {
+      final response = result.data?['launches'];
+
+      final list = response.map<Launches>((e) => Launches.fromJson(e)).toList();
+      return list;
     }
-
-    final response = result.data?['launches'];
-
-    final list = response.map<Launches>((e) => Launches.fromJson(e)).toList();
-    return list;
   }
 
   String _buildQuery(String missionName, int offset) {
