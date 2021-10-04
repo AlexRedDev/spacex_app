@@ -34,6 +34,7 @@ class _HomeViewState extends State<HomeView> {
   AppBar _appBar() {
     return AppBar(
       title: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         decoration: BoxDecoration(
           color: Theme.of(context).backgroundColor,
           borderRadius: BorderRadius.circular(15),
@@ -47,11 +48,15 @@ class _HomeViewState extends State<HomeView> {
             context.read<AppBloc>().add(ChangedMissionName(value));
             context.read<AppBloc>().add(FetchLaunches());
           },
-          textAlign: TextAlign.center,
-          decoration: const InputDecoration(
+          textAlign: TextAlign.left,
+          decoration: InputDecoration(
+            icon: Icon(
+              Icons.search,
+              color: Theme.of(context).hintColor,
+            ),
             border: InputBorder.none,
             hintText: 'Enter mission name',
-            hintStyle: TextStyle(color: Colors.white54),
+            hintStyle: TextStyle(color: Theme.of(context).hintColor),
           ),
         ),
       ),
